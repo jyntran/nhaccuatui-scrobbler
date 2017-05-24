@@ -6,11 +6,17 @@
 	    var playerElem = document.getElementById('nameSingerflashPlayer');	    
 	    var trackName = playerElem.children[0].children[0].innerText;
 	    var artistName = playerElem.children[1].children[0].innerText;
-
-	    return {
+	    var metadata = {
 	    	track: trackName,
 	    	artist: artistName
-	    }
+	    };
+	    chrome.runtime.sendMessage({
+	    	name: "metadata",
+	    	data: metadata
+	    }, function(response) {
+	    	//console.log(response);
+		});
+	    return metadata;
 	}
 
 	function scrobbleTrack(data) {
@@ -64,6 +70,7 @@
 
 		function checkCurrentTime() {
 			getTotalTime();
+			metadata = getMetadata();
 			currentTimeStr = $('#utCurrentTimeflashPlayer').text();
 			currentTime = hmsToSecondsOnly(currentTimeStr);	
 			if (!isScrobbled && isHalfway(totalTime, currentTime)) {
