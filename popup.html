@@ -41,8 +41,13 @@
         margin-bottom: 16px;
         min-height: 40px;
       }
-      .music-note {
+      #musicNote {
         color: #333;
+        display: block;
+      }
+      #scrobbled {
+        color: #2582be;
+        display: none;
       }
     </style>
 
@@ -64,11 +69,12 @@
           <div id="nowPlaying">
             <div class="pure-g">
               <div class="pure-u-1-5">
-                <i class="fa fa-music fa-3x music-note"></i>
+                <i class="fa fa-music fa-3x" id="musicNote"></i>
               </div>
               <div class="pure-u-4-5">
                 <span id="notPlaying">Nothing is playing!</span> <strong><span id="track"></span></strong></br>
                 <span id="artist"></span>
+                <span id="scrobbled">Scrobbled</span>
               </div>
             </div>
           </div>

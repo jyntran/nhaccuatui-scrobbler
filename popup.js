@@ -12,6 +12,10 @@ window.onload = function() {
 			renderNowPlaying();
 			sendResponse({name: 'metadata success'});
 		}
+		if (request.name == 'scrobbled') {
+			renderScrobbleStatus(true);
+			sendResponse({name: 'scrobbled success'});
+		}
 	});
 
 	chrome.runtime.getBackgroundPage(function(bg) {
@@ -63,5 +67,13 @@ function renderNowPlaying() {
 		document.getElementById('artist').innerText = metadata.artist;
 	} else {
 		document.getElementById('notPlaying').style.display = 'block';
+	}
+}
+
+function renderScrobbleStatus(status) {
+	if (status) {
+		document.getElementById('scrobbled').style.display = 'block';
+	} else {
+		document.getElementById('scrobbled').style.display = 'none';
 	}
 }
