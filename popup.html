@@ -7,7 +7,15 @@
 <html>
   <head>
     <title>NhacCuaTui Scrobbler</title>
+    <link rel="stylesheet" href="https://unpkg.com/purecss@0.6.2/build/pure-min.css" integrity="sha384-UQiGfs9ICog+LwheBSRCt1o5cbyKIHbwjWscjemyBMT9YCUMZffs6UqUTd0hObXD" crossorigin="anonymous">
     <style>
+      body {
+        width: 240px;
+      }
+      .container {
+        background: linear-gradient(0deg, #fff, #fff, #f1f1f1);
+        padding: 8px;
+      }
     </style>
 
     <!--
@@ -19,17 +27,24 @@
     <script src="popup.js"></script>
   </head>
   <body>
-    <strong>NhacCuaTui Scrobbler</strong>
-    <div class="status">
-      <div id="loggedIn">
-        <p>You are logged in as <span id="userName"> </span></p>
-        <button id="logOutButton">Log out</button>            
-      </div>
-      <div id="loggedOut">
-        <p>You are currently not logged in.</p>
-        <button id="logInButton">Authenticate on LastFM</button>    
+    <div class="container">
+      <div class="pure-g">
+        <div class="pure-u-5-5">
+          <h3>NhacCuaTui Scrobbler</h3>
+          <div class="status">
+            <div id="loggedIn">
+              <p>You are logged in as <strong><span id="userName"></span></strong>.</p>
+              <button id="logOutButton" class="pure-button pure-button-primary">Log out</button>            
+            </div>
+            <div id="loggedOut">
+              <p>You are currently not logged in.</p>
+              <button id="logInButton" class="pure-button pure-button-primary">Log in via LastFM</button>    
+            </div>
+          </div>
+        </div>
       </div>
     </div>
+  </div>
   </body>
 </html>
 
