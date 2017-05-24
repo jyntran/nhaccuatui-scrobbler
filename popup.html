@@ -6,19 +6,8 @@
  -->
 <html>
   <head>
-    <title>Getting Started Extension's Popup</title>
+    <title>NhacCuaTui Scrobbler</title>
     <style>
-      body {
-        font-family: "Segoe UI", "Lucida Grande", Tahoma, sans-serif;
-        font-size: 100%;
-      }
-      #status {
-        /* avoid an excessively wide status text */
-        white-space: pre;
-        text-overflow: ellipsis;
-        overflow: hidden;
-        max-width: 400px;
-      }
     </style>
 
     <!--
@@ -30,8 +19,17 @@
     <script src="popup.js"></script>
   </head>
   <body>
-    <div id="status"></div>
-    <img id="image-result" hidden>
+    <strong>NhacCuaTui Scrobbler</strong>
+    <div class="status">
+      <div id="loggedIn">
+        <p>You are logged in as <span id="userName"> </span></p>
+        <button id="logOutButton">Log out</button>            
+      </div>
+      <div id="loggedOut">
+        <p>You are currently not logged in.</p>
+        <button id="logInButton">Authenticate on LastFM</button>    
+      </div>
+    </div>
   </body>
 </html>
 

@@ -1,16 +1,42 @@
 {
   "manifest_version": 2,
 
-  "name": "Getting started example",
-  "description": "This extension shows a Google Image search result for the current page",
-  "version": "1.0",
-
+  "name": "NhacCuaTui Scrobbler",
+  "description": "This extension scrobbles currently playing music from NhacCuaTui to LastFM",
+  "version": "0.1",
+  "icons": {
+    "16": "icon-16.png",
+    "48": "icon-48.png",
+    "128": "icon-128.png"
+  },
   "browser_action": {
-    "default_icon": "icon.png",
+    "default_icon": "icon-128.png",
     "default_popup": "popup.html"
   },
   "permissions": [
-    "activeTab",
-    "https://ajax.googleapis.com/"
+    "tabs",
+    "webNavigation",
+    "http://www.last.fm/",
+    "http://ws.audioscrobbler.com/"
+  ],
+  "background": {
+    "scripts": [
+      "js/jquery.md5.js",
+      "config.js",
+      "lastfm.js",
+      "background.js"
+    ]
+  },
+  "content_scripts": [
+    {
+      "matches": ["http://www.nhaccuatui.com/*"],
+      "js": [
+        "js/jquery-3.2.1.min.js",
+        "contentscript.js"
+      ]
+    }
+  ],
+  "web_accessible_resources": [
+    "lastfm_cb.html"
   ]
 }
