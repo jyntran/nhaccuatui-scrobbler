@@ -35,11 +35,12 @@
 				name: 'scrobble',
 				data: obj
 			}, function(resp) {
-	        	if (!resp.error) {
-	          		console.log('Success: scrobbled the following track: ' + data.artist + ' - ' + data.track);
+				console.log(resp);
+	        	if (!resp.data.error) {
+	          		//console.log('Success: scrobbled the following track: ' + data.artist + ' - ' + data.track);
 	          		isScrobbled = true;
 	        	} else {
-	          		console.log('Error: could not scrobbled the following track: ' + data.artist + ' - ' + data.track);
+	          		//console.log('Error: could not scrobbled the following track: ' + data.artist + ' - ' + data.track);
 	    		}
 				setTimeout(function(){
 	        	}, 2000);

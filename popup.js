@@ -62,11 +62,11 @@ function renderAuthState() {
 
 function renderNowPlaying() {
 	if (metadata) {
-		document.getElementById('notPlaying').style.display = 'none';
 		document.getElementById('track').innerText = metadata.track;
 		document.getElementById('artist').innerText = metadata.artist;
 	} else {
-		document.getElementById('notPlaying').style.display = 'block';
+//		document.getElementById('track').innerText = 'Nothing is playing!';
+//		document.getElementById('artist').innerText = '';
 	}
 }
 
