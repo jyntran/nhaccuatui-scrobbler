@@ -2,41 +2,65 @@
 
 (function() {
 
-	function getMetadata() {
-	    var playerElem = document.getElementById('nameSingerflashPlayer');	    
-	    var trackName = playerElem.children[0].children[0].innerText;
-	    var artistName = playerElem.children[1].children[0].innerText;
-
-	    return {
-	    	track: trackName,
-	    	artist: artistName
-	    }
-	}
-
-	function scrobbleTrack(data) {
-		chrome.runtime.sendMessage({
-			name: 'scrobble',
-			data: {
-				track: data.track,
-				artist: data.artist,
-				timestamp: new Date().getTime() / 1000
-			}
-		}, function(resp) {
-        	if (!resp.error) {
-          		console.log('Success: scrobbled the following track: ' + data.artist + ' - ' + data.track);
-        	} else {
-          		console.log('Error: could not scrobbled the following track: ' + data.artist + ' - ' + data.track);
-    		}
-			setTimeout(function(){
-        	}, 2000);
-      	});
-	}
-
 	$(document).ready(function(){
 		var totalTimeStr, totalTime,
 			currentTimeStr, currentTime,
-			metadata;
+			metadata,
 			isScrobbled = false;
+
+		function onSongPage() {
+			return window.location.href.indexOf('nhaccuatui.com/bai-hat/') > -1;
+		}
+
+		function onPlaylistPage() {
+			return window.location.href.indexOf('nhaccuatui.com/playlist/') > -1;
+		}
+
+		function getMetadata() {
+			var trackName, artistName;
+			if (onSongPage()) {
+				var titleElem = document.getElementsByClassName('name_title')[0];
+				trackName = titleElem.children[0].innerText;
+				artistName = titleElem.children[2].children[0].innerText;
+			} else if (onPlaylistPage()) {
+			    var playerElem = document.getElementById('nameSingerflashPlayer');	    
+			    trackName = playerElem.children[0].children[0].innerText;
+			    artistName = playerElem.children[1].children[0].innerText;
+			}
+		    var metadata = {
+		    	track: trackName,
+		    	artist: artistName
+		    };
+		    chrome.runtime.sendMessage({
+		    	name: "metadata",
+		    	data: metadata
+		    }, function(resp) {
+		    	//console.log(resp);
+			});
+		    return metadata;
+		}
+
+		function scrobbleTrack(data) {
+			var obj = {
+				track: data.track,
+				artist: data.artist,
+				timestamp: new Date().getTime() / 1000
+			};
+			chrome.runtime.sendMessage({
+				name: 'scrobble',
+				data: obj
+			}, function(resp) {
+				//console.log(resp);
+	        	if (!resp.data.error) {
+	          		//console.log('Success: scrobbled the following track: ' + data.artist + ' - ' + data.track);
+	          		isScrobbled = true;
+	        	} else {
+	          		//console.log('Error: could not scrobbled the following track: ' + data.artist + ' - ' + data.track);
+	    		}
+				setTimeout(function(){
+	        	}, 2000);
+	      	});
+		}
 
 		/* https://stackoverflow.com/a/9640417 */
 		function hmsToSecondsOnly(str) {
@@ -64,11 +88,20 @@
 
 		function checkCurrentTime() {
 			getTotalTime();
+			metadata = getMetadata();
 			currentTimeStr = $('#utCurrentTimeflashPlayer').text();
 			currentTime = hmsToSecondsOnly(currentTimeStr);	
 			if (!isScrobbled && isHalfway(totalTime, currentTime)) {
 				scrobbleTrack(metadata);
-				isScrobbled = true;
+			} else
+			if (isScrobbled) {
+				// TODO: prevent message from being sent multiple times afterward
+				chrome.runtime.sendMessage({
+					name: 'scrobbled',
+					data: metadata
+				}, function(resp) {
+					//console.log(resp);
+				});
 			}
 		}
 

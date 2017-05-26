@@ -1,8 +1,22 @@
 /* popup.js */
 
 var bp;
+var metadata;
 
 window.onload = function() {
+
+	chrome.runtime.onMessage.addListener(
+		function(request, sender, sendResponse) {
+		if (request.name == 'metadata') {
+			metadata = request.data;
+			renderNowPlaying();
+			sendResponse({name: 'metadata success'});
+		}
+		if (request.name == 'scrobbled') {
+			renderScrobbleStatus(true);
+			sendResponse({name: 'scrobbled success'});
+		}
+	});
 
 	chrome.runtime.getBackgroundPage(function(bg) {
 		bp = bg;
@@ -32,7 +46,6 @@ window.onload = function() {
 		}
 
     });
-
 };
 
 function renderAuthState() {
@@ -40,8 +53,24 @@ function renderAuthState() {
 	    document.getElementById('loggedOut').style.display = 'none';
 	    document.getElementById('loggedIn').style.display = 'block';
 	    document.getElementById('userName').innerText = bp.lf.session.name;
+	    document.getElementById('lastFMButton').href = 'https://last.fm/user/' + bp.lf.session.name;
 	} else {
 	    document.getElementById('loggedIn').style.display = 'none';
 	    document.getElementById('loggedOut').style.display = 'block';
+	}
+}
+
+function renderNowPlaying() {
+	if (metadata) {
+		document.getElementById('track').innerText = metadata.track;
+		document.getElementById('artist').innerText = metadata.artist;
+	}
+}
+
+function renderScrobbleStatus(status) {
+	if (status) {
+		document.getElementById('scrobbled').style.display = 'block';
+	} else {
+		document.getElementById('scrobbled').style.display = 'none';
 	}
 }
