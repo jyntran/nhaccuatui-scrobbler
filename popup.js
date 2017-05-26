@@ -64,9 +64,6 @@ function renderNowPlaying() {
 	if (metadata) {
 		document.getElementById('track').innerText = metadata.track;
 		document.getElementById('artist').innerText = metadata.artist;
-	} else {
-//		document.getElementById('track').innerText = 'Nothing is playing!';
-//		document.getElementById('artist').innerText = '';
 	}
 }
 

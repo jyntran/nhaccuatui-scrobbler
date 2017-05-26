@@ -8,10 +8,25 @@
 			metadata,
 			isScrobbled = false;
 
+		function onSongPage() {
+			return window.location.href.indexOf('nhaccuatui.com/bai-hat/') > -1;
+		}
+
+		function onPlaylistPage() {
+			return window.location.href.indexOf('nhaccuatui.com/playlist/') > -1;
+		}
+
 		function getMetadata() {
-		    var playerElem = document.getElementById('nameSingerflashPlayer');	    
-		    var trackName = playerElem.children[0].children[0].innerText;
-		    var artistName = playerElem.children[1].children[0].innerText;
+			var trackName, artistName;
+			if (onSongPage()) {
+				var titleElem = document.getElementsByClassName('name_title')[0];
+				trackName = titleElem.children[0].innerText;
+				artistName = titleElem.children[2].children[0].innerText;
+			} else if (onPlaylistPage()) {
+			    var playerElem = document.getElementById('nameSingerflashPlayer');	    
+			    trackName = playerElem.children[0].children[0].innerText;
+			    artistName = playerElem.children[1].children[0].innerText;
+			}
 		    var metadata = {
 		    	track: trackName,
 		    	artist: artistName
@@ -19,8 +34,8 @@
 		    chrome.runtime.sendMessage({
 		    	name: "metadata",
 		    	data: metadata
-		    }, function(response) {
-		    	//console.log(response);
+		    }, function(resp) {
+		    	//console.log(resp);
 			});
 		    return metadata;
 		}
@@ -35,7 +50,7 @@
 				name: 'scrobble',
 				data: obj
 			}, function(resp) {
-				console.log(resp);
+				//console.log(resp);
 	        	if (!resp.data.error) {
 	          		//console.log('Success: scrobbled the following track: ' + data.artist + ' - ' + data.track);
 	          		isScrobbled = true;
