@@ -67,7 +67,7 @@ function _sendRequest(method, params, callback) {
 
 function scrobble(artist, track, timestamp, callback) {
   var params = {
-    api_key: lastfm_keys.api_key,
+    api_key: CONFIG.api_key,
     sk: session.key,
     method: 'track.scrobble',
     artist: artist,
@@ -97,14 +97,14 @@ function _getSignature(params) {
     sig += key + params[key];
   }
 
-  sig += lastfm_keys.api_secret;
+  sig += CONFIG.api_secret;
   
   return md5(sig);
 }
 
 function authorize(token, callback) {
   var params = {
-    api_key: lastfm_keys.api_key,
+    api_key: CONFIG.api_key,
     method: 'auth.getSession',
     token: token
   };
@@ -132,9 +132,9 @@ function getSession(token) {
 }
 
 function login() {
-  var cb = chrome.runtime.getURL(lastfm_keys.cb_file);
+  var cb = chrome.runtime.getURL(CONFIG.cb_file);
   chrome.tabs.create({
-      url: 'http://www.last.fm/api/auth?api_key=' + lastfm_keys.api_key + '&cb=' + cb
+      url: 'http://www.last.fm/api/auth?api_key=' + CONFIG.api_key + '&cb=' + cb
   });
 }
 

@@ -1,4 +1,4 @@
-/* lastfm_cb.js */
+/* cb.js */
 
 function _url_param(name, url) {
     return unescape((RegExp(name + '=' +

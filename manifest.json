@@ -21,7 +21,7 @@
   ],
   "background": {
     "scripts": [
-      "scripts/lastfm_keys.js",
+      "api/config.js",
       "js/vendor/jquery-3.2.1.min.js",
       "js/vendor/md5.min.js",
       "background.js"
@@ -37,6 +37,6 @@
     }
   ],
   "web_accessible_resources": [
-    "lastfm_cb.html"
+    "cb.html"
   ]
 }
