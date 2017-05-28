@@ -1,9 +1,4 @@
 <!doctype html>
-<!--
- This page is shown when the extension button is clicked, because the
- "browser_action" field in manifest.json contains the "default_popup" key with
- value "popup.html".
- -->
 <html>
   <head>
     <title>NhacCuaTui Scrobbler</title>
@@ -42,7 +37,7 @@
       #nowPlaying {
         display: block;
         margin-bottom: 16px;
-        min-height: 40px;
+        min-height: 48px;
       }
       #musicNote {
         color: #333;
@@ -53,17 +48,10 @@
         display: none;
       }
     </style>
-
-    <!--
-      - JavaScript and HTML must be in separate files: see our Content Security
-      - Policy documentation[1] for details and explanation.
-      -
-      - [1]: https://developer.chrome.com/extensions/contentSecurityPolicy
-     -->
     <script type="text/javascript" src="scripts/lastfm_keys.js"></script>
     <script type="text/javascript" src="js/vendor/jquery-3.2.1.min.js"></script>
     <script type="text/javascript" src="js/vendor/md5.min.js"></script>
-    <script type="text/javascript" src="lastfm.new.js"></script>
+    <script type="text/javascript" src="lastfm.js"></script>
     <script type="text/javascript" src="popup.js"></script>
   </head>
   <body>
@@ -79,8 +67,8 @@
                 <i class="fa fa-headphones fa-3x" id="musicNote"></i>
               </div>
               <div class="pure-u-4-5">
-                <strong><span id="track">Nothing is playing!</span></strong></br>
-                <span id="artist"></span>
+                <strong><span id="track"></span></strong></br>
+                <span id="artist"></span></br>
                 <span id="scrobbled">Scrobbled</span>
               </div>
             </div>

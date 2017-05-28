@@ -24,7 +24,7 @@
       "scripts/lastfm_keys.js",
       "js/vendor/jquery-3.2.1.min.js",
       "js/vendor/md5.min.js",
-      "lastfm.new.js",
+      "lastfm.js",
       "background.js"
     ]
   },

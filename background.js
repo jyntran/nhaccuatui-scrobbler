@@ -1,10 +1,6 @@
 /* background.js */
 
-var session = {
-  key: '',
-  name: ''
-}
-
+var session = {};
 var api_url = 'http://ws.audioscrobbler.com/2.0/';
 
 chrome.runtime.onMessage.addListener(
@@ -45,8 +41,16 @@ function _sendRequest(method, params, callback) {
     url: uri,
     data: _data,
     dataType: 'json',
+    headers: {
+      "Content-type": "application/x-www-form-urlencoded; charset=UTF-8",
+      "If-Modified-Since": "Thu, 01 Jun 1970 00:00:00 GMT",
+      "Pragma": "no-cache"
+    },
     success: function(data) {
       callback(data);
+    },
+    error: function(err) {
+      console.log(err);
     }
   });
 }
@@ -64,11 +68,9 @@ function scrobble(artist, track, timestamp, callback) {
   params.api_sig = _getSignature(params);
   params.format = 'json';
 
-  _sendRequest('POST', params,
-    function(resp) {
-      callback(resp);
-    }
-  );
+  _sendRequest('POST', params, function(resp) {
+    callback(resp);
+  });
 }
 
 function _getSignature(params) {
@@ -86,7 +88,7 @@ function _getSignature(params) {
   }
 
   sig += lastfm_keys.api_secret;
-
+  
   return md5(sig);
 }
 
