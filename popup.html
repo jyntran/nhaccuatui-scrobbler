@@ -1,37 +1,90 @@
 <!doctype html>
-<!--
- This page is shown when the extension button is clicked, because the
- "browser_action" field in manifest.json contains the "default_popup" key with
- value "popup.html".
- -->
 <html>
   <head>
-    <title>Getting Started Extension's Popup</title>
+    <title>NhacCuaTui Scrobbler</title>
+    <link rel="stylesheet" href="https://unpkg.com/purecss@0.6.2/build/pure-min.css" integrity="sha384-UQiGfs9ICog+LwheBSRCt1o5cbyKIHbwjWscjemyBMT9YCUMZffs6UqUTd0hObXD" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" crossorigin="anonymous">
     <style>
       body {
-        font-family: "Segoe UI", "Lucida Grande", Tahoma, sans-serif;
-        font-size: 100%;
+        color: #333;
+        width: 240px;
+      }
+      a {
+        color: #2582be;
+      }
+      #heading {
+        background: #111;
+        background-image: linear-gradient(0deg, #000, #333);
+        color: #eee;
+        display: inline-block;
+        text-align: center;
+        width: 100%;
+      }
+      #heading h3 {
+        margin: 8px;  
+      }
+      #container {
+        background: #fff;
+        background-image: linear-gradient(0deg, #fff, #fff, #f1f1f1);
+        padding: 8px;
       }
       #status {
-        /* avoid an excessively wide status text */
-        white-space: pre;
-        text-overflow: ellipsis;
-        overflow: hidden;
-        max-width: 400px;
+        text-align: right;
+      }
+      #notPlaying {
+        display: none;
+      }
+      #nowPlaying {
+        display: block;
+        margin-bottom: 16px;
+        min-height: 48px;
+      }
+      #scrobbled {
+        color: #2582be;
+        display: none;
       }
     </style>
-
-    <!--
-      - JavaScript and HTML must be in separate files: see our Content Security
-      - Policy documentation[1] for details and explanation.
-      -
-      - [1]: https://developer.chrome.com/extensions/contentSecurityPolicy
-     -->
-    <script src="popup.js"></script>
+    <script type="text/javascript" src="vendor/jquery-3.2.1.min.js"></script>
+    <script type="text/javascript" src="popup.js"></script>
   </head>
   <body>
-    <div id="status"></div>
-    <img id="image-result" hidden>
+    <div id="heading">
+      <h3>NhacCuaTui Scrobbler</h3>
+    </div>
+    <div id="container">
+      <div class="pure-g">
+        <div class="pure-u-5-5">
+          <div id="nowPlaying">
+            <div class="pure-g">
+              <div class="pure-u-1-5">
+                <i class="fa fa-headphones fa-3x"></i>
+              </div>
+              <div class="pure-u-4-5">
+                <strong><span id="track">Nothing is playing!</span></strong></br>
+                <span id="artist"></span></br>
+                <span id="scrobbled">Scrobbled</span>
+              </div>
+            </div>
+          </div>
+          <div id="status">
+            <div id="loggedIn">
+              <a id="lastFMButton" href="#" target="_blank" class="pure-button pure-button-primary">
+                <i class="fa fa-lastfm"></i> <span id="userName"></span>
+              </a>
+              <button id="logOutButton" class="pure-button pure-button">
+                <i class="fa fa-sign-out"></i> Log out
+              </button>            
+            </div>
+            <div id="loggedOut">
+              <button id="logInButton" class="pure-button pure-button-primary">
+                <i class="fa fa-sign-in"></i> Log in
+              </button>    
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
   </body>
 </html>
 
