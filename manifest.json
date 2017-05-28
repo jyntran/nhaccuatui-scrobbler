@@ -5,12 +5,12 @@
   "description": "This extension scrobbles currently playing music from NhacCuaTui to LastFM",
   "version": "0.1",
   "icons": {
-    "16": "icon-16.png",
-    "48": "icon-48.png",
-    "128": "icon-128.png"
+    "16": "icons/16.png",
+    "48": "icons/48.png",
+    "128": "icons/128.png"
   },
   "browser_action": {
-    "default_icon": "icon-48.png",
+    "default_icon": "icons/48.png",
     "default_popup": "popup.html"
   },
   "permissions": [
