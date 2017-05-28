@@ -8,6 +8,12 @@ chrome.runtime.onMessage.addListener(
         sendResponse({name:'scrobble response', data: resp});
       });
     }
+    if (request.name == 'now-playing') {
+      var r = request.data;
+      lastfm.updateNowPlaying(r.artist, r.track, function(resp){
+        sendResponse({name:'now-playing response', data: resp});
+      });
+    }
     return true;
   }
 );
