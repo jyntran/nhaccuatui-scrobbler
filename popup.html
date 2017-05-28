@@ -60,7 +60,11 @@
       -
       - [1]: https://developer.chrome.com/extensions/contentSecurityPolicy
      -->
-    <script src="popup.js"></script>
+    <script type="text/javascript" src="scripts/lastfm_keys.js"></script>
+    <script type="text/javascript" src="js/vendor/jquery-3.2.1.min.js"></script>
+    <script type="text/javascript" src="js/vendor/md5.min.js"></script>
+    <script type="text/javascript" src="lastfm.new.js"></script>
+    <script type="text/javascript" src="popup.js"></script>
   </head>
   <body>
     <div id="heading">
@@ -83,9 +87,9 @@
           </div>
           <div id="status">
             <div id="loggedIn">
-              <a id="lastFMButton" href="#" target="_blank" class="pure-button pure-button-primary">
+              <button id="lastFMButton" class="pure-button pure-button-primary">
                 <i class="fa fa-lastfm"></i> <span id="userName"></span>
-              </a>
+              </button>
               <button id="logOutButton" class="pure-button pure-button">
                 <i class="fa fa-sign-out"></i> Log out
               </button>            

@@ -21,10 +21,10 @@
   ],
   "background": {
     "scripts": [
-      "vendor/jquery-3.2.1.min.js",
-      "vendor/md5.min.js",
-      "config.js",
-      "lastfm.js",
+      "scripts/lastfm_keys.js",
+      "js/vendor/jquery-3.2.1.min.js",
+      "js/vendor/md5.min.js",
+      "lastfm.new.js",
       "background.js"
     ]
   },
@@ -32,7 +32,7 @@
     {
       "matches": ["http://www.nhaccuatui.com/*"],
       "js": [
-        "vendor/jquery-3.2.1.min.js",
+        "js/vendor/jquery-3.2.1.min.js",
         "contentscript.js"
       ]
     }

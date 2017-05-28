@@ -1,6 +1,6 @@
-/* config.js */
+/* lastfm_keys.js */
 
-var CONFIG = {
+var lastfm_keys = {
 	api_key: '',
 	api_secret: '',
 
