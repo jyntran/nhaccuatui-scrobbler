@@ -3,6 +3,16 @@
 var session = {};
 var api_url = 'http://ws.audioscrobbler.com/2.0/';
 
+var lastfm = {
+  _sendRequest: this._sendRequest,
+  _getSignature: this._getSignature,
+  authorize: this.authorize,
+  getSession: this.getSession,
+  scrobble: this.scrobble,
+  login: this.login,
+  logout: this.logout
+}
+
 chrome.runtime.onMessage.addListener(
   function(request, sender, sendResponse) {
     if (request.name == 'scrobble') {
@@ -119,4 +129,16 @@ function getSession(token) {
       localStorage.setItem('nctscrobble_session_name', resp.session.name);
     }
   });
+}
+
+function login() {
+  var cb = chrome.runtime.getURL(lastfm_keys.cb_file);
+  chrome.tabs.create({
+      url: 'http://www.last.fm/api/auth?api_key=' + lastfm_keys.api_key + '&cb=' + cb
+  });
+}
+
+function logout() {
+  localStorage.removeItem('nctscrobble_session_key');
+  localStorage.removeItem('nctscrobble_session_name');
 }

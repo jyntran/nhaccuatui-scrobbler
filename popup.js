@@ -1,7 +1,24 @@
 /* popup.js */
 
 function init() {
-	var metadata;
+	var lastfm, metadata;
+
+	chrome.runtime.getBackgroundPage(function(bg) {
+		lastfm = bg.lastfm;
+	});
+
+	chrome.runtime.onMessage.addListener(
+		function(request, sender, sendResponse) {
+		if (request.name == 'metadata') {
+			metadata = request.data;
+			renderNowPlaying();
+			sendResponse({name: 'metadata success'});
+		}
+		if (request.name == 'scrobbled') {
+			renderScrobbleStatus(true);
+			sendResponse({name: 'scrobbled success'});
+		}
+	});
 
 	function renderNowPlaying() {
 		if (metadata) {
@@ -18,25 +35,12 @@ function init() {
 		}
 	}
 
-	chrome.runtime.onMessage.addListener(
-		function(request, sender, sendResponse) {
-		if (request.name == 'metadata') {
-			metadata = request.data;
-			renderNowPlaying();
-			sendResponse({name: 'metadata success'});
-		}
-		if (request.name == 'scrobbled') {
-			renderScrobbleStatus(true);
-			sendResponse({name: 'scrobbled success'});
-		}
-	});
-
 	$('#logInButton').click(function() {
-		lastfm.authorize();
+		lastfm.login();
 	});
 
 	$('#logOutButton').click(function() {
-		lastfm.deauthorize();
+		lastfm.logout();
 		location.reload();
 	});
 

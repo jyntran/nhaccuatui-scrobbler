@@ -6,6 +6,6 @@ function _url_param(name, url) {
 }
 
 chrome.runtime.getBackgroundPage(function(bp) {
-    bp.getSession(_url_param("token", location.search));
+    bp.lastfm.getSession(_url_param("token", location.search));
     window.close();
 });
