@@ -7,7 +7,8 @@ var lastfm = {
   getSession: this.getSession,
   scrobble: this.scrobble,
   login: this.login,
-  logout: this.logout
+  logout: this.logout,
+  session: {}
 }
 
 function _sendRequest(method, params, callback) {
@@ -53,7 +54,7 @@ function _sendRequest(method, params, callback) {
 function scrobble(artist, track, timestamp, callback) {
   var params = {
     api_key: CONFIG.api_key,
-    sk: session.key,
+    sk: lastfm.session.key,
     method: 'track.scrobble',
     artist: artist,
     track: track,
@@ -109,7 +110,7 @@ function authorize(token, callback) {
 function getSession(token) {
   authorize(token, function(resp) {
     if (resp && resp.session) {
-      session = resp.session;
+      lastfm.session = resp.session;
       localStorage.setItem('nctscrobble_session_key', resp.session.key);
       localStorage.setItem('nctscrobble_session_name', resp.session.name);
     }

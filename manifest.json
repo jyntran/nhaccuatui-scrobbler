@@ -14,8 +14,6 @@
     "default_popup": "popup.html"
   },
   "permissions": [
-    "tabs",
-    "webNavigation",
     "http://www.last.fm/",
     "http://ws.audioscrobbler.com/"
   ],
