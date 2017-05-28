@@ -1,4 +1,4 @@
-/* lastfm_cb.js */
+/* cb.js */
 
 function _url_param(name, url) {
     return unescape((RegExp(name + '=' +
@@ -6,8 +6,6 @@ function _url_param(name, url) {
 }
 
 chrome.runtime.getBackgroundPage(function(bp) {
-    bp.getSession(_url_param("token", location.search));
-    setTimeout(function() {
-        window.close();
-    }, 100);
+    bp.lastfm.getSession(_url_param("token", location.search));
+    window.close();
 });

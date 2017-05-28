@@ -5,25 +5,24 @@
   "description": "This extension scrobbles currently playing music from NhacCuaTui to LastFM",
   "version": "0.1",
   "icons": {
-    "16": "icon-16.png",
-    "48": "icon-48.png",
-    "128": "icon-128.png"
+    "16": "icons/16.png",
+    "48": "icons/48.png",
+    "128": "icons/128.png"
   },
   "browser_action": {
-    "default_icon": "icon-48.png",
+    "default_icon": "icons/48.png",
     "default_popup": "popup.html"
   },
   "permissions": [
-    "tabs",
-    "webNavigation",
     "http://www.last.fm/",
     "http://ws.audioscrobbler.com/"
   ],
   "background": {
     "scripts": [
-      "js/jquery.md5.js",
-      "config.js",
-      "lastfm.js",
+      "vendor/jquery-3.2.1.min.js",
+      "vendor/md5.min.js",
+      "api/config.js",
+      "api/lastfm.js",
       "background.js"
     ]
   },
@@ -31,12 +30,12 @@
     {
       "matches": ["http://www.nhaccuatui.com/*"],
       "js": [
-        "js/jquery-3.2.1.min.js",
+        "vendor/jquery-3.2.1.min.js",
         "contentscript.js"
       ]
     }
   ],
   "web_accessible_resources": [
-    "lastfm_cb.html"
+    "cb.html"
   ]
 }

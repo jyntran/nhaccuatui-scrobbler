@@ -1,9 +1,4 @@
 <!doctype html>
-<!--
- This page is shown when the extension button is clicked, because the
- "browser_action" field in manifest.json contains the "default_popup" key with
- value "popup.html".
- -->
 <html>
   <head>
     <title>NhacCuaTui Scrobbler</title>
@@ -42,25 +37,15 @@
       #nowPlaying {
         display: block;
         margin-bottom: 16px;
-        min-height: 40px;
-      }
-      #musicNote {
-        color: #333;
-        display: block;
+        min-height: 48px;
       }
       #scrobbled {
         color: #2582be;
         display: none;
       }
     </style>
-
-    <!--
-      - JavaScript and HTML must be in separate files: see our Content Security
-      - Policy documentation[1] for details and explanation.
-      -
-      - [1]: https://developer.chrome.com/extensions/contentSecurityPolicy
-     -->
-    <script src="popup.js"></script>
+    <script type="text/javascript" src="vendor/jquery-3.2.1.min.js"></script>
+    <script type="text/javascript" src="popup.js"></script>
   </head>
   <body>
     <div id="heading">
@@ -72,11 +57,11 @@
           <div id="nowPlaying">
             <div class="pure-g">
               <div class="pure-u-1-5">
-                <i class="fa fa-headphones fa-3x" id="musicNote"></i>
+                <i class="fa fa-headphones fa-3x"></i>
               </div>
               <div class="pure-u-4-5">
                 <strong><span id="track">Nothing is playing!</span></strong></br>
-                <span id="artist"></span>
+                <span id="artist"></span></br>
                 <span id="scrobbled">Scrobbled</span>
               </div>
             </div>

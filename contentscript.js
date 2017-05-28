@@ -50,7 +50,6 @@
 				name: 'scrobble',
 				data: obj
 			}, function(resp) {
-				//console.log(resp);
 	        	if (!resp.data.error) {
 	          		//console.log('Success: scrobbled the following track: ' + data.artist + ' - ' + data.track);
 	          		isScrobbled = true;
