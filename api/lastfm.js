@@ -6,6 +6,7 @@ var lastfm = {
   authorize: this.authorize,
   getSession: this.getSession,
   scrobble: this.scrobble,
+  updateNowPlaying: this.updateNowPlaying,
   login: this.login,
   logout: this.logout,
   session: {}
@@ -59,6 +60,23 @@ function scrobble(artist, track, timestamp, callback) {
     artist: artist,
     track: track,
     timestamp: timestamp
+  };
+
+  params.api_sig = _getSignature(params);
+  params.format = 'json';
+
+  _sendRequest('POST', params, function(resp) {
+    callback(resp);
+  });
+}
+
+function updateNowPlaying(artist, track, callback) {
+  var params = {
+    api_key: CONFIG.api_key,
+    sk: lastfm.session.key,
+    method: 'track.updateNowPlaying',
+    artist: artist,
+    track: track
   };
 
   params.api_sig = _getSignature(params);
