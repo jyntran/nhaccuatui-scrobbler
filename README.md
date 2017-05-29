@@ -9,13 +9,27 @@ Chrome extension that scrobbles music from [NhacCuaTui.com](http://www.nhaccuatu
 
 Feel free to contribute or post issues to the [GitHub repository](https://github.com/jyntran/nhaccuatui-scrobbler).
 
-## User Installation
+## Installation
 
-1. Download the .crx here: http://jyntran.ca/chrome/nhaccuatui-scrobbler.crx
+### Chrome Web Store
+
+**[Download from the Web Store](https://chrome.google.com/webstore/detail/nhaccuatui-scrobbler/obonbmgpnanbghpehmjooibelkiajofd)**
+
+### .crx
+
+1. Download the .crx [from my site](http://jyntran.ca/chrome/nhaccuatui-scrobbler.crx) or from the [releases](https://github.com/jyntran/nhaccuatui-scrobbler/releases)
 2. Open Chrome and go to `chrome://extensions`
 3. Drag and drop the .crx into Chrome
 4. Accept permissions to install the extension
-5. Click on the extension button, then click Log In
+5. Click on the extension button, then click **Log in**
+
+### Unpacked
+
+1. Download this repo as a .zip, then extract the archive
+2. Open Chrome and go to `chrome://extensions`
+3. Check **Developer mode**
+4. Click **Load unpacked extension** and select the extracted directory to install
+5. Click on the extension button, then click **Log in**
 
 ## Note for Developers
 
