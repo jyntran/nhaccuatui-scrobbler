@@ -12,7 +12,7 @@ function init() {
 		if (request.name == 'metadata') {
 			metadata = request.data;
 			renderNowPlaying();
-			sendResponse({name: 'metadata success'});
+			//sendResponse({name: 'metadata success'});
 		}
 		if (request.name == 'scrobbled') {
 			renderScrobbleStatus(true);

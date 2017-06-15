@@ -9,7 +9,10 @@ var lastfm = {
   updateNowPlaying: this.updateNowPlaying,
   login: this.login,
   logout: this.logout,
-  session: {}
+  session: {
+    key: localStorage.getItem('nctscrobble_session_key') || null,
+    name: localStorage.getItem('nctscrobble_session_name') || null
+  }
 }
 
 function _sendRequest(method, params, callback) {
