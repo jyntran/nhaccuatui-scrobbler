@@ -35,7 +35,7 @@
 		    	name: "metadata",
 		    	data: metadata
 		    }, function(resp) {
-		    	//console.log(resp);
+		    	//console.log('getMetadata', resp);
 			});
 		    return metadata;
 		}
@@ -57,23 +57,6 @@
 	          		//console.log('Error: could not scrobbled the following track: ' + data.artist + ' - ' + data.track);
 	    		}
 	      	});
-		}
-
-		function updateNowPlaying(data) {
-			var obj = {
-				track: data.track,
-				artist: data.artist
-			};
-			chrome.runtime.sendMessage({
-				name: 'now-playing',
-				data, obj
-			}, function(resp) {
-	        	if (!resp.data.error) {
-	          		//console.log('Success: now playing following track: ' + data.artist + ' - ' + data.track);
-	        	} else {
-	          		//console.log('Error: could not update now-playing for the following track: ' + data.artist + ' - ' + data.track);
-	    		}
-			});
 		}
 
 		/* https://stackoverflow.com/a/9640417 */
@@ -103,7 +86,6 @@
 		function checkCurrentTime() {
 			getTotalTime();
 			metadata = getMetadata();
-			updateNowPlaying(metadata);
 			currentTimeStr = $('#utCurrentTimeflashPlayer').text();
 			currentTime = hmsToSecondsOnly(currentTimeStr);	
 			if (!isScrobbled && isHalfway(totalTime, currentTime)) {
