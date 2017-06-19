@@ -28,17 +28,29 @@
 			return $('.utTotalTime')
 		}
 
-		function getMetadata() {
-			var trackName, artistName;
+		function getTrackName() {
 			if (onSongPage() || onVideoPage()) {
-				var titleElem = document.getElementsByClassName('name_title')[0];
-				trackName = titleElem.children[0].innerText;
-				artistName = titleElem.children[2].children[0].innerText;
+				const elem = document.getElementsByClassName('name_title')[0];
+				return elem.children[0].innerText;
 			} else if (onPlaylistPage()) {
-		    var playerElem = document.getElementById('nameSingerflashPlayer');	    
-		    trackName = playerElem.children[0].children[0].innerText;
-		    artistName = playerElem.children[1].children[0].innerText;
+		    const elem = document.getElementById('nameSingerflashPlayer');	    
+				return elem.children[0].children[0].innerText
+			}
+		}
+
+		function getArtistName() {
+			if (onSongPage() || onVideoPage()) {
+				const elem = document.getElementsByClassName('name_title')[0];
+				return elem.children[2].children[0].innerText;
+			} else if (onPlaylistPage()) {
+		    const elem = document.getElementById('nameSingerflashPlayer');	    
+		    return elem.children[1].children[0].innerText;
 		  }
+		}
+
+		function getMetadata() {
+			var trackName = getTrackName()
+			var artistName = getArtistName()
 		    var metadata = {
 		    	track: trackName,
 		    	artist: artistName
