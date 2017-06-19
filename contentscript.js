@@ -16,17 +16,29 @@
 			return window.location.href.indexOf('nhaccuatui.com/playlist/') > -1;
 		}
 
+		function onVideoPage() {
+			return window.location.href.indexOf('nhaccuatui.com/video/') > -1;
+		}
+
+		function getCurrentTime() {
+			return $('.utCurrentTime')
+		}
+
+		function getTotalTime() {
+			return $('.utTotalTime')
+		}
+
 		function getMetadata() {
 			var trackName, artistName;
-			if (onSongPage()) {
+			if (onSongPage() || onVideoPage()) {
 				var titleElem = document.getElementsByClassName('name_title')[0];
 				trackName = titleElem.children[0].innerText;
 				artistName = titleElem.children[2].children[0].innerText;
 			} else if (onPlaylistPage()) {
-			    var playerElem = document.getElementById('nameSingerflashPlayer');	    
-			    trackName = playerElem.children[0].children[0].innerText;
-			    artistName = playerElem.children[1].children[0].innerText;
-			}
+		    var playerElem = document.getElementById('nameSingerflashPlayer');	    
+		    trackName = playerElem.children[0].children[0].innerText;
+		    artistName = playerElem.children[1].children[0].innerText;
+		  }
 		    var metadata = {
 		    	track: trackName,
 		    	artist: artistName
@@ -74,9 +86,10 @@
 			return current >= (total/2);
 		}
 
-		function getTotalTime() {
-			if ($('#utTotalTimeflashPlayer').text() != totalTimeStr) {
-				totalTimeStr = $('#utTotalTimeflashPlayer').text();
+		function checkTotalTime() {
+			var total = getTotalTime()
+			if (total.text() != totalTimeStr) {
+				totalTimeStr = total.text();
 				totalTime = hmsToSecondsOnly(totalTimeStr);
 				isScrobbled = false;
 				metadata = getMetadata();
@@ -84,9 +97,9 @@
 		}
 
 		function checkCurrentTime() {
-			getTotalTime();
+			checkTotalTime()
 			metadata = getMetadata();
-			currentTimeStr = $('#utCurrentTimeflashPlayer').text();
+			currentTimeStr = getCurrentTime().text();
 			currentTime = hmsToSecondsOnly(currentTimeStr);	
 			if (!isScrobbled && isHalfway(totalTime, currentTime)) {
 				scrobbleTrack(metadata);
@@ -103,7 +116,11 @@
 		}
 
 		$('#playerMp3flashPlayer').ready(function(){
-			$('body').on('DOMSubtreeModified', '#utCurrentTimeflashPlayer', checkCurrentTime);
+			$('body').on('DOMSubtreeModified', '.utCurrentTime', checkCurrentTime);
+		});
+
+		$('#videonctPlayer').ready(function(){
+			$('body').on('DOMSubtreeModified', '.utCurrentTime', checkCurrentTime);
 		});
 	});
 
