@@ -16,17 +16,41 @@
 			return window.location.href.indexOf('nhaccuatui.com/playlist/') > -1;
 		}
 
-		function getMetadata() {
-			var trackName, artistName;
-			if (onSongPage()) {
-				var titleElem = document.getElementsByClassName('name_title')[0];
-				trackName = titleElem.children[0].innerText;
-				artistName = titleElem.children[2].children[0].innerText;
+		function onVideoPage() {
+			return window.location.href.indexOf('nhaccuatui.com/video/') > -1;
+		}
+
+		function getCurrentTime() {
+			return $('.utCurrentTime')
+		}
+
+		function getTotalTime() {
+			return $('.utTotalTime')
+		}
+
+		function getTrackName() {
+			if (onSongPage() || onVideoPage()) {
+				const elem = document.getElementsByClassName('name_title')[0];
+				return elem.children[0].innerText;
 			} else if (onPlaylistPage()) {
-			    var playerElem = document.getElementById('nameSingerflashPlayer');	    
-			    trackName = playerElem.children[0].children[0].innerText;
-			    artistName = playerElem.children[1].children[0].innerText;
+		    const elem = document.getElementById('nameSingerflashPlayer');	    
+				return elem.children[0].children[0].innerText
 			}
+		}
+
+		function getArtistName() {
+			if (onSongPage() || onVideoPage()) {
+				const elem = document.getElementsByClassName('name_title')[0];
+				return elem.children[2].children[0].innerText;
+			} else if (onPlaylistPage()) {
+		    const elem = document.getElementById('nameSingerflashPlayer');	    
+		    return elem.children[1].children[0].innerText;
+		  }
+		}
+
+		function getMetadata() {
+			var trackName = getTrackName()
+			var artistName = getArtistName()
 		    var metadata = {
 		    	track: trackName,
 		    	artist: artistName
@@ -74,9 +98,10 @@
 			return current >= (total/2);
 		}
 
-		function getTotalTime() {
-			if ($('#utTotalTimeflashPlayer').text() != totalTimeStr) {
-				totalTimeStr = $('#utTotalTimeflashPlayer').text();
+		function checkTotalTime() {
+			var total = getTotalTime()
+			if (total.text() != totalTimeStr) {
+				totalTimeStr = total.text();
 				totalTime = hmsToSecondsOnly(totalTimeStr);
 				isScrobbled = false;
 				metadata = getMetadata();
@@ -84,9 +109,9 @@
 		}
 
 		function checkCurrentTime() {
-			getTotalTime();
+			checkTotalTime()
 			metadata = getMetadata();
-			currentTimeStr = $('#utCurrentTimeflashPlayer').text();
+			currentTimeStr = getCurrentTime().text();
 			currentTime = hmsToSecondsOnly(currentTimeStr);	
 			if (!isScrobbled && isHalfway(totalTime, currentTime)) {
 				scrobbleTrack(metadata);
@@ -103,7 +128,11 @@
 		}
 
 		$('#playerMp3flashPlayer').ready(function(){
-			$('body').on('DOMSubtreeModified', '#utCurrentTimeflashPlayer', checkCurrentTime);
+			$('body').on('DOMSubtreeModified', '.utCurrentTime', checkCurrentTime);
+		});
+
+		$('#videonctPlayer').ready(function(){
+			$('body').on('DOMSubtreeModified', '.utCurrentTime', checkCurrentTime);
 		});
 	});
 
