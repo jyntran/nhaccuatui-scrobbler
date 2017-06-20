@@ -20,6 +20,10 @@
 			return window.location.href.indexOf('nhaccuatui.com/video/') > -1;
 		}
 
+		function onUserPage() {
+			return window.location.href.indexOf('nhaccuatui.com/user/') > -1;
+		}
+
 		function getCurrentTime() {
 			return $('.utCurrentTime')
 		}
@@ -35,6 +39,8 @@
 			} else if (onPlaylistPage()) {
 		    const elem = document.getElementById('nameSingerflashPlayer');	    
 				return elem.children[0].children[0].innerText
+			} else if (onUserPage()) {
+				return $('#list-item-music .cur .name_song').text()
 			}
 		}
 
@@ -45,7 +51,9 @@
 			} else if (onPlaylistPage()) {
 		    const elem = document.getElementById('nameSingerflashPlayer');	    
 		    return elem.children[1].children[0].innerText;
-		  }
+			} else if (onUserPage()) {
+				return $('#list-item-music .cur .name_singer').last().text()
+			}
 		}
 
 		function getMetadata() {
@@ -132,6 +140,10 @@
 		});
 
 		$('#videonctPlayer').ready(function(){
+			$('body').on('DOMSubtreeModified', '.utCurrentTime', checkCurrentTime);
+		});
+
+		$('#playPanel').ready(function(){
 			$('body').on('DOMSubtreeModified', '.utCurrentTime', checkCurrentTime);
 		});
 	});
