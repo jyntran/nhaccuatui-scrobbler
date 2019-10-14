@@ -36,6 +36,10 @@ Feel free to contribute or post issues to the [GitHub repository](https://github
 - You will need a Last.fm API key and secret to run it: http://www.last.fm/api
 - Place your key and secret in `api/config.js`. The file `config.sample.js` is provided as a template.
 
+## Privacy Policy
+
+Read the extension's privacy policy [here](privacy.md).
+
 ## License
 
 [MIT](license.txt)
