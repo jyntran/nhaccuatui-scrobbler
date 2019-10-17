@@ -1,6 +1,5 @@
 <!doctype html>
 <html>
-
 <head>
   <title>NhacCuaTui Scrobbler</title>
   <link rel="stylesheet" href="https://unpkg.com/purecss@0.6.2/build/pure-min.css"
@@ -35,7 +34,9 @@
       background-image: linear-gradient(0deg, #fff, #fff, #f1f1f1);
       padding: 8px;
     }
-
+    #loginPrompt {
+      color: #cc0000;
+    }
     #status {
       text-align: right;
     }
@@ -75,28 +76,27 @@
               <strong><span id="track">Nothing is playing!</span></strong></br>
               <span id="artist"></span></br>
               <span id="scrobbled">Scrobbled</span>
+              <p id="loginPrompt">Please login to scrobble songs.</p>
             </div>
           </div>
-        </div>
-        <div id="status">
-          <div id="loggedIn">
-            <a id="lastFMButton" href="#" target="_blank" class="pure-button pure-button-primary">
-              <i class="fa fa-lastfm"></i> <span id="userName"></span>
-            </a>
-            <button id="logOutButton" class="pure-button pure-button">
-              <i class="fa fa-sign-out"></i> Log out
-            </button>
-          </div>
-          <div id="loggedOut">
-            <button id="logInButton" class="pure-button pure-button-primary">
-              <i class="fa fa-sign-in"></i> Log in
-            </button>
+          <div id="status">
+            <div id="loggedIn">
+              <a id="lastFMButton" href="#" target="_blank" class="pure-button pure-button-primary">
+                <i class="fa fa-lastfm"></i> <span id="userName"></span>
+              </a>
+              <button id="logOutButton" class="pure-button pure-button">
+                <i class="fa fa-sign-out"></i> Log out
+              </button>            
+            </div>
+            <div id="loggedOut">
+              <button id="logInButton" class="pure-button pure-button-primary">
+                <i class="fa fa-sign-in"></i> Log in
+              </button>    
+            </div>
           </div>
         </div>
       </div>
     </div>
   </div>
-  </div>
-</body>
-
+  </body>
 </html>
