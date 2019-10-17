@@ -1,0 +1,24 @@
+{
+  "name": "nhaccuatui-scrobbler",
+  "version": "0.1.0",
+  "description": "My Chrome Extension",
+  "private": true,
+  "scripts": {
+    "watch": "webpack --mode=development --watch --config config/webpack.config.js",
+    "build": "webpack --mode=production --config config/webpack.config.js"
+  },
+  "devDependencies": {
+    "copy-webpack-plugin": "^5.0.4",
+    "css-loader": "^3.2.0",
+    "file-loader": "^4.2.0",
+    "mini-css-extract-plugin": "^0.8.0",
+    "size-plugin": "^2.0.0",
+    "webpack": "^4.41.2",
+    "webpack-cli": "^3.3.9",
+    "webpack-merge": "^4.2.2"
+  },
+  "engines": {
+    "node": ">=10.16.3",
+    "npm": ">=6.12.0"
+  }
+}

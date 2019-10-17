@@ -3,9 +3,10 @@
 ![NhacCuaTui Scrobbler screenshot](screenshot.png)
 
 Chrome extension that scrobbles music from [NhacCuaTui.com](http://www.nhaccuatui.com) to [Last.fm](http://www.last.fm)
-- Adds current track to Last.fm profile under Scrobbling Now 
-- Scrobbles after the halfway mark on a song
-- Please keep only one open tab of playing music on NhacCuaTui
+
+-   Adds current track to Last.fm profile under Scrobbling Now
+-   Scrobbles after the halfway mark on a song
+-   Please keep only one open tab of playing music on NhacCuaTui
 
 Feel free to contribute or post issues to the [GitHub repository](https://github.com/jyntran/nhaccuatui-scrobbler).
 
@@ -33,8 +34,10 @@ Feel free to contribute or post issues to the [GitHub repository](https://github
 
 ## Note for Developers
 
-- You will need a Last.fm API key and secret to run it: http://www.last.fm/api
-- Place your key and secret in `api/config.js`. The file `config.sample.js` is provided as a template.
+-   You will need a Last.fm API key and secret to run it: http://www.last.fm/api
+-   Place your key and secret in `api/config.js`. The file `config.sample.js` is provided as a template.
+-   To get started, install Node ^10.16.3 with npm ^6.12.0, then run `npm i && npm watch`
+-   Follow `Unpacked` instructions above and select the compiled `build` directory in the project root
 
 ## Privacy Policy
 
