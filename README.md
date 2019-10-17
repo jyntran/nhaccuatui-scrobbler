@@ -39,6 +39,7 @@ Feel free to contribute or post issues to the [GitHub repository](https://github
 ## Privacy Policy
 
 Read the extension's privacy policy [here](privacy.md).
+The privacy policy is also available in Vietnamese [here](privacy-vn.md).
 
 ## License
 
