@@ -1,4 +1,4 @@
-/* contentscript.js */
+/* contentScript.js */
 
 (function() {
 
